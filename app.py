@@ -64,6 +64,8 @@ def debug_upload_file(key):
 @app.route('/file/<key>/', methods=['POST'])
 def upload_file(key):
     user = user_by_key(key)
+    if not user:
+        abort(404)
     file = request.files['file']
     if file:
         content = file.read()
